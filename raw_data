@@ -1,0 +1,6 @@
+#per iniziare ad analizzare i dati sulle onde gravitazionali
+#è necessario sapere prima quali librerie importare
+#e come recuperare i dati pubblici delle osservazioni
+
+#questo codice racchiude le librerie da importare
+#e tre metodi diversi di importazione dei dati
