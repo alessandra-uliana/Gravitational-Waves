@@ -1,0 +1,34 @@
+#onde gravitazionali
+#Installiamo le librerie necessarie
+!pip install -q gwpy pycbc
+# Librerie per la manipolazione dei dati e calcoli
+import numpy as np
+import matplotlib.pyplot as plt
+import warnings
+# Ignora l'avviso specifico del reindirizzamento LAL
+warnings.filterwarnings("ignore", "Wswiglal-redir-stdio")
+
+
+# Librerie specifiche per le onde gravitazionali
+from gwpy.timeseries import TimeSeries
+from pycbc.waveform import get_td_waveform
+
+# Impostiamo lo stile dei grafici per vederli meglio
+plt.style.use('default')
+
+# 1. Generiamo l'onda (forma d'onda nel dominio del tempo)
+hp, hc = get_td_waveform(approximant="SEOBNRv4_opt",
+                         mass1=30, # Massa del primo buco nero (in masse solari)
+                         mass2=30, # Massa del secondo buco nero
+                         delta_t=1.0/4096, # Frequenza di campionamento
+                         f_lower=30) # Frequenza di inizio del segnale
+
+# 2. Creiamo il grafico
+plt.figure(figsize=(10, 4))
+plt.plot(hp.sample_times, hp, label='Polarizzazione Plus')
+plt.xlabel('Tempo (s)')
+plt.ylabel('Strain (Ampiezza dell\'onda)')
+plt.title('Segnale teorico di una fusione di buchi neri')
+plt.grid(True)
+plt.legend()
+plt.show()
